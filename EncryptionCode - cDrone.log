@@ -1,0 +1,72 @@
+
+mkdir secret-cdrone
+
+sudo mount -t ecryptfs ~/secret-cdrone ~/secret-cdrone -o key=passphrase,\
+ecryptfs_cipher=aes,ecryptfs_key_bytes=16,ecryptfs_passthrough=no,\
+ecryptfs_enable_filename_crypto=no,passphrase_passwd=password,ecryptfs_sig=633937dbcf1fef34
+
+mv cci-recite secret-cdrone/
+
+sudo umount ~/secret-cdrone
+
+python to unclock all src code
+
+sudo mount -t ecryptfs ~/secret-cdrone ~/secret-cdrone -o key=passphrase,\
+ecryptfs_cipher=aes,ecryptfs_key_bytes=16,ecryptfs_passthrough=no,\
+ecryptfs_enable_filename_crypto=no,passphrase_passwd=password,ecryptfs_sig=633937dbcf1fef34
+
+============================  Docs to reference ++++++++++++++++++++++++++++++++++++=++++++++
+
+EcryptFS installation
+First, update the software repositories and install ecryptfs with
+sudo apt-get update
+sudo apt-get install -y ecryptfs-utils lsof
+1
+2
+	
+sudo apt-get update
+sudo apt-get install -y ecryptfs-utils lsof
+
+Create an encrypted directory
+Think of a good PASSWORD, then perform these steps:
+cd ~
+mkdir secret
+sudo mount -t ecryptfs ~/secret ~/secret -o key=passphrase,\
+ecryptfs_cipher=aes,ecryptfs_key_bytes=16,ecryptfs_passthrough=no,\
+ecryptfs_enable_filename_crypto=no,passphrase_passwd=PASSWORD
+1
+2
+3
+4
+5
+	
+cd ~
+mkdir secret
+sudo mount -t ecryptfs ~/secret ~/secret -o key=passphrase,\
+ecryptfs_cipher=aes,ecryptfs_key_bytes=16,ecryptfs_passthrough=no,\
+ecryptfs_enable_filename_crypto=no,passphrase_passwd=PASSWORD
+
+Answer both questions asked with yes. ~/secret is the directory used for encryption.
+
+Check the encryption
+With the directory still being mounted, create a test file with
+sudo nano ~/secret/test.txt
+1
+	
+sudo nano ~/secret/test.txt
+
+enter “test” and display it with
+cat ~/secret/test.txt
+1
+	
+cat ~/secret/test.txt
+
+which will show “test”.
+After unmounting the directory with
+sudo umount ~/secret
+1
+	
+sudo umount ~/secret
+
+trying to display the file content like above just shows characters in machine language. Use the same mount command used for creating the encrypted directory for remounting (decyphering) the content on the Raspberry Pi again.
+Check out the Bodhizazen EcryptFS Tutorial for much more info, e.g. how to store the password on an USB stick.
