@@ -13,9 +13,9 @@ def main():
         # while True:
             ###Check HUB connection
         if check_ping(HOST_DB) is True:
-           print "OK"
+            print "OK"
            #Mac =  arp_get_mac(HOST_DB)
-           _ecrypt_mount(_ECRYPT_DIR,_ECRYPT_MOUNT_POINT)
+            _ecrypt_mount(_ECRYPT_DIR, _ECRYPT_MOUNT_POINT)
 
         else:
             print "Ping fail"
